@@ -1,7 +1,5 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
+using AspNetCore_Portfolio.Middlewares;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -12,15 +10,19 @@ namespace AspNetCore_Portfolio
 {
     public class Startup
     {
-        // This method gets called by the runtime. Use this method to add services to the container.
-        // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
+        int x = 5;
+        int y = 8;
+        int z = 0;
+
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddTransient<SimpleMiddleware>();
+            // services.AddTransient<CustomMiddleware>(); -- Only IMiddleware
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -28,13 +30,25 @@ namespace AspNetCore_Portfolio
 
             app.UseRouting();
 
-            app.UseEndpoints(endpoints =>
+            app.UseMiddleware<SimpleMiddleware>();
+            app.UseCustomMiddleware();
+
+            app.Run(async (context) =>
             {
-                endpoints.MapGet("/", async context =>
-                {
-                    await context.Response.WriteAsync("Hello World!");
-                });
+                z = x * y;
+                // await next.Invoke();
             });
+
+            app.UseEndpoints(endpoints => { endpoints.MapGet("/", Home); });
+
+            app.Run(async (context) => { await context.Response.WriteAsync($"Результат x * y = {z}"); });
+        }
+
+        private async Task Home(HttpContext context)
+        {
+            x++;
+            context.Response.ContentType = "text/html; charset=utf-8";
+            await context.Response.WriteAsync($"User: {x.ToString("#,#")} , z = {z}");
         }
     }
 }
