@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspNetCore_Portfolio", "AspNetCore_Portfolio.csproj", "{7DE02621-7155-4D72-9FC8-FBE41E732988}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebClient", "WebClient\WebClient.csproj", "{8A4B8A5E-331E-4A27-87DC-0A8171B2F4E4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -8,9 +8,9 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{7DE02621-7155-4D72-9FC8-FBE41E732988}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7DE02621-7155-4D72-9FC8-FBE41E732988}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7DE02621-7155-4D72-9FC8-FBE41E732988}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7DE02621-7155-4D72-9FC8-FBE41E732988}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8A4B8A5E-331E-4A27-87DC-0A8171B2F4E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A4B8A5E-331E-4A27-87DC-0A8171B2F4E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A4B8A5E-331E-4A27-87DC-0A8171B2F4E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A4B8A5E-331E-4A27-87DC-0A8171B2F4E4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
