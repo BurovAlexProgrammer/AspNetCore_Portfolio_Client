@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using WebDAL;
 
 namespace WebAPI
 {
@@ -46,7 +47,12 @@ namespace WebAPI
 
             app.UseAuthorization();
 
-            app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
+            app.UseEndpoints(endpoints =>
+            {
+                var user = new User();
+                
+                endpoints.MapControllers();
+            });
         }
     }
 }
