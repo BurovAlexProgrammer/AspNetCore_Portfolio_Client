@@ -27,7 +27,7 @@ namespace WebClient
             app.UseEndpoints(endpoints => { 
                 endpoints.MapGet("/", async context =>
                 {
-                    var user = new User();
+                    var user = new Guest();
                     x++;
                     await context.Response.WriteAsync($"Hello World! {x}"); 
                 }); 
