@@ -10,26 +10,25 @@ namespace WebAPI
 
         public PostgresDbContext()
         {
-            Database.EnsureDeleted();
-            Database.EnsureCreated();
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseNpgsql("Host=localhost;Port=3000;Database=Portfolio;Username=postgres;Password=Freedom88");
+            optionsBuilder.UseNpgsql("Host=localhost;Port=3000;Database=Portfolio;Username=postgres;Password=123");
         }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            //Fluent API - higest priority
-            builder.Entity<Guest>()
-                .ToTable("WTF") //Table name
-                .HasKey("Id"); //Primary key
+            //Fluent API - highest priority
 
-            builder.Entity<Department>()
-                .Property(x => x.Name)
-                .IsRequired()
-                .HasColumnName("DepName");
+            // builder.Entity<Guest>()
+            //     .ToTable("WTF") //Table name
+            //     .HasKey("Id"); //Primary key
+
+            // builder.Entity<Department>()
+            //     .Property(x => x.Name)
+            //     .IsRequired()
+            //     .HasColumnName("DepName");
         }
     }
 }

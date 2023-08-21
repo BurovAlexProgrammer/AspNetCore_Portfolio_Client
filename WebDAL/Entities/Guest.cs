@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WebDAL
 {
-    [Table("Guests")]
+    //[Table("Guests")]
     public class Guest
     {
         public Int64 Id { get; set; }
@@ -12,7 +12,6 @@ namespace WebDAL
         [Required] //NOT_NULL
         [MinLength(2)]
         [MaxLength(20)]
-        
         public string Name { get; set; }
         
         public string Surname { get; set; }
@@ -22,5 +21,7 @@ namespace WebDAL
         
         [NotMapped]
         public bool IsNew { get; set; }
+        
+        public Department Department { get; set; }
     }
 }

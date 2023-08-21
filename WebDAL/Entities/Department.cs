@@ -6,6 +6,7 @@ namespace WebDAL
     {
         public int Id { get; set; }
         public string Name { get; set; }
+        
         public ICollection<Guest> Guests  { get; set; }
     }
 }

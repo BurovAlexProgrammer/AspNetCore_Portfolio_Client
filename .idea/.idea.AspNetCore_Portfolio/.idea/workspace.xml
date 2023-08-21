@@ -8,16 +8,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9128b108-1b8a-4bcc-bbb2-141fed9b4ff3" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.AspNetCore_Portfolio/.idea/projectSettingsUpdater.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.AspNetCore_Portfolio/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/WebDAL/Entities/Guest.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.AspNetCore_Portfolio/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.AspNetCore_Portfolio/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AspNetCore_Portfolio.sln" beforeDir="false" afterPath="$PROJECT_DIR$/AspNetCore_Portfolio.sln" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.AspNetCore_Portfolio/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.AspNetCore_Portfolio/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ConsoleApp/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ConsoleApp/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebAPI/PostgresDbContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WebAPI/PostgresDbContext.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WebAPI/Startup.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WebAPI/Startup.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebAPI/WebAPI.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/WebAPI/WebAPI.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebClient/Startup.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WebClient/Startup.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebClient/WebClient.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/WebClient/WebClient.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebDAL/User.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebDAL/Entities/Department.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WebDAL/Entities/Department.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebDAL/Entities/Guest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WebDAL/Entities/Guest.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -142,7 +138,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1692468640919</updated>
-      <workItem from="1692468642668" duration="14293000" />
+      <workItem from="1692468642668" duration="21660000" />
     </task>
     <task id="LOCAL-00001" summary="Recreate clean project">
       <created>1692469122920</created>
@@ -165,7 +161,14 @@
       <option name="project" value="LOCAL" />
       <updated>1692501505965</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Test EntityFramework">
+      <created>1692556240787</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1692556240787</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -189,25 +192,7 @@
     <MESSAGE value="Recreate clean project" />
     <MESSAGE value="Create initial WebAPI" />
     <MESSAGE value="Add WebDAL" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add WebDAL" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/ConsoleApp/Program.cs</url>
-          <line>15</line>
-          <properties documentPath="D:\_NetCore\AspNetCore_Portfolio\ConsoleApp\Program.cs" initialLine="15" containingFunctionPresentation="method 'Main'">
-            <startOffsets>
-              <option value="408" />
-            </startOffsets>
-            <endOffsets>
-              <option value="443" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="5" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="Test EntityFramework" />
+    <option name="LAST_COMMIT_MESSAGE" value="Test EntityFramework" />
   </component>
 </project>
