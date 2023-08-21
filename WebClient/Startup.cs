@@ -13,24 +13,32 @@ namespace WebClient
         
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddMvc();
+            services.AddControllersWithViews();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment())
+            if (!env.IsDevelopment())
+            {
+                app.UseHsts();
+            }
+            else
             {
                 app.UseDeveloperExceptionPage();
             }
+            
 
             app.UseRouting();
 
-            app.UseEndpoints(endpoints => { 
-                endpoints.MapGet("/", async context =>
-                {
-                    var user = new Guest();
-                    x++;
-                    await context.Response.WriteAsync($"Hello World! {x}"); 
-                }); 
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapRazorPages();
+                // endpoints.MapGet("/", async context =>
+                // {
+                //     x++;
+                //     await context.Response.WriteAsync($"Hello World! {x}"); 
+                // }); 
             });
         }
     }

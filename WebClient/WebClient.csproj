@@ -5,7 +5,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="wwwRoot" />
+      <Folder Include="wwwRoot\lib" />
     </ItemGroup>
 
     <ItemGroup>
