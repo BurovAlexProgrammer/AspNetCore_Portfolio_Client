@@ -5,16 +5,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="wwwRoot\lib" />
-    </ItemGroup>
-
-    <ItemGroup>
       <ProjectReference Include="..\WebDAL\WebDAL.csproj" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <PackageReference Include="EntityFramework" Version="6.4.4" />
-      <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="5.0.10" />
     </ItemGroup>
 
 </Project>

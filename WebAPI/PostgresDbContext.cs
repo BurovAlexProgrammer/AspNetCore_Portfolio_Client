@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using WebDAL;
+using WebDAL.Entity;
 
 namespace WebAPI
 {
