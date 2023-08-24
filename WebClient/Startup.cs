@@ -1,13 +1,18 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using WebClient.Constants;
+using Microsoft.EntityFrameworkCore;
+using WebClient.Data;
 
 namespace WebClient
 {
@@ -20,13 +25,27 @@ namespace WebClient
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            
+            services.Configure<CookiePolicyOptions>(options => {
+                options.CheckConsentNeeded = context => true;
+                options.MinimumSameSitePolicy = SameSiteMode.Strict;
+            });
+            
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(options =>
+                {
+                    options.ExpireTimeSpan = TimeSpan.FromMinutes(20);
+                    options.SlidingExpiration = true;
+                    options.AccessDeniedPath = "/Forbidden/";
+                });
+
+            services.AddDbContext<WebClientContext>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("WebClientContext")));
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
@@ -36,16 +55,27 @@ namespace WebClient
             else
             {
                 app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
 
+            app.UseCookiePolicy();
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
             app.UseRouting();
 
-            // app.UseAuthorization();
+            app.UseAuthorization();
+
+            app.Use(async (context, next) =>
+            {
+                if (!context.Request.Cookies.ContainsKey("GuestName") && context.Request.Path.Value != Endpoints.Login)
+                {
+                    Console.WriteLine("GuestName is empty");
+                    context.Response.Redirect(Endpoints.Login);
+                }
+
+                await next.Invoke();
+            });
 
             app.UseEndpoints(endpoints =>
             {

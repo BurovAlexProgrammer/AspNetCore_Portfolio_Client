@@ -1,16 +1,16 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Net.Http;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 
 namespace WebClient
 {
     public class Program
     {
+        static HttpClient client = new() {BaseAddress = new Uri("https://localhost:5005/")};
+
+        public static HttpClient ApiClient => client;
+
         public static void Main(string[] args)
         {
             CreateHostBuilder(args).Build().Run();

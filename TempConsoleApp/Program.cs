@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Linq;
 using WebAPI;
+using WebDAL.Entity;
 
 namespace ConsoleApp
 {
@@ -24,27 +24,20 @@ namespace ConsoleApp
         {
             Console.WriteLine("Start");
 
-            // using (var db = new PostgresDbContext())
-            // {
-            //     db.EnsureDeleted();
-            //     db.EnsureCreated();
-            //     var dep1 = new Department() { Name = "Dep1" };
-            //     var dep2 = new Department() { Name = "Dep2" };
-            //     var guest1 = new Guest() { Name = "Test1", Surname = "Ttt", Department = dep1 };
-            //     var guest2 = new Guest() { Name = "Test2", Surname = "Aaaa", Department = dep2 };
-            //     db.Guests.Add(guest1);
-            //     db.Guests.Add(guest2);
-            //     db.SaveChanges();
-            //     var t1 = db.Departments.Find(dep1.Id);
-            //     var t2 = t1.Guests.ToList();
-            //     Console.WriteLine("t2: " + t2.Count);
-            // }
-
-            using (var db = new PostgresDbContext())
+            using (var db = new PdbContext())
             {
-                var dep3 = db.Departments.Single(x => x.Name == "Dep3");
-                dep3.Name = "Dep33";
-                db.Update(dep3);
+                var guest1 = new Guest() { Name = "Test1", Password = "Ttt" };
+                var guest2 = new Guest() { Name = "Test2", Password = "Aaaa" };
+                db.Guests.Add(guest1);
+                db.Guests.Add(guest2);
+                db.SaveChanges();
+            }
+
+            using (var db = new PdbContext())
+            {
+                // var dep3 = db.Departments.Single(x => x.Name == "Dep3");
+                // dep3.Name = "Dep33";
+                // db.Update(dep3);
                 db.SaveChanges();
             }
 

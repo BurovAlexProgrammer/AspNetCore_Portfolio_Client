@@ -3,12 +3,11 @@ using WebDAL.Entity;
 
 namespace WebAPI
 {
-    public class PostgresDbContext : DbContext
+    public class PdbContext : Microsoft.EntityFrameworkCore.DbContext
     {
         public DbSet<Guest> Guests { get; set; }
-        public DbSet<Department> Departments { get; set; }
 
-        public PostgresDbContext()
+        public PdbContext()
         {
         }
 
