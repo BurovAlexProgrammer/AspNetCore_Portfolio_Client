@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
+using WebClient.Constants;
 using WebClient.Models;
 using WebDAL.Entity;
 
@@ -32,14 +33,16 @@ namespace WebClient.Controllers
         {
             if (ModelState.IsValid)
             {
-                _logger.Log(LogLevel.Information, "[Post]Login form is valid.");
                 // var t = ModelState.ToDictionary(x => x.Key, y => y.Value.RawValue.ToString());
                 var response = await Program.ApiClient.GetAsync($"api/Guest/Login/{guest.Name}/{guest.Password}");
-                var json = await response.Content.ReadAsStringAsync();
-            }
-            else
-            {
-                _logger.Log(LogLevel.Warning, "[Post]Login form is not valid.");
+                var content = await response.Content.ReadAsStringAsync();
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var guestResponse = JsonConvert.DeserializeObject<Guest>(content);
+                    HttpContext.Response.Cookies.Append("GuestName", guestResponse.Name);
+                    return RedirectToRoute(Endpoints.Home);
+                }
             }
 
             return View(guest);
@@ -47,9 +50,8 @@ namespace WebClient.Controllers
 
         public IActionResult Index()
         {
-            var t = ControllerContext.HttpContext.Request;
-            var g = new Guest() { Name = "Alex" };
-            return View(g);
+            var guest = new Guest() { Name = ControllerContext.HttpContext.Request.Cookies["GuestName"] };
+            return View(guest);
         }
 
         public IActionResult Privacy()

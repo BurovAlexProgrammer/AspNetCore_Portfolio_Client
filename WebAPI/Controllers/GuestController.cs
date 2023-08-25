@@ -1,5 +1,8 @@
 ﻿using System.Linq;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using WebDAL.Entity;
 
 namespace WebAPI.Controllers
 {
@@ -7,9 +10,11 @@ namespace WebAPI.Controllers
     [Route("api/[controller]/[action]")]
     public class GuestController : ControllerBase
     {
-        public GuestController()
-        {
+        private ILogger<GuestController> _logger;
 
+        public GuestController(ILogger<GuestController> logger)
+        {
+            _logger = logger;
         }
         
         [HttpGet] //TODO change to POST later
@@ -19,15 +24,42 @@ namespace WebAPI.Controllers
         {
             using var db = new PdbContext();
 
-            var isExist = db.Guests.Any(x => x.Name == name && x.Password == password);
+            var requiredGuest = GetGuest(name);
 
-            if (isExist)
+            if (requiredGuest == null)
             {
-                return new ObjectResult(db.Guests.First()); //new JsonResult($"Guest name: {name}");
+                return NotFound($"Гость с именем '{name}' не найден.");
             }
 
-            return new ObjectResult(db.Guests.First());
+            if (requiredGuest.Password != password)
+            {
+                return StatusCode(StatusCodes.Status406NotAcceptable, "Неверный пароль.");
+            }
+            
+            return new ObjectResult(requiredGuest);
             return NotFound($"Guest name: {name} not found");
         }
+
+        private Guest GetGuest(string name)
+        {
+            using (var db = new PdbContext())
+            {
+                var result = db.Guests.Where(x => x.Name == name).ToList();
+
+                if (result.Count > 1)
+                {
+                    _logger.LogError($"db.Guest - exc: duplicate guest name '{name}'");
+                    return null;
+                }
+
+                if (result.Count == 0)
+                {
+                    _logger.LogError($"db.Guest - guest '{name}' not found.");
+                    return null;
+                }
+
+                return result.First();
+            }
+        } 
     }
 }
