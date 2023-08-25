@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -17,34 +18,49 @@ namespace WebAPI.Controllers
             _logger = logger;
         }
         
-        [HttpGet] //TODO change to POST later
-        //[Route("Default/GetRecordsById/{id}")]
-        [Route("{name}/{password}")]
-        public IActionResult Login(string name, string password)
+        [HttpPost]
+        public IActionResult Login([FromBody]object json)
         {
-            using var db = new PdbContext();
+            var guestInput = System.Text.Json.JsonSerializer.Deserialize<Guest>(json.ToString()!);
+            var existGuest = GetGuest(guestInput.name);
 
-            var requiredGuest = GetGuest(name);
-
-            if (requiredGuest == null)
+            if (existGuest == null)
             {
-                return NotFound($"Гость с именем '{name}' не найден.");
+                return NotFound($"Гость с именем '{guestInput.name}' не найден.");
             }
 
-            if (requiredGuest.Password != password)
+            if (existGuest.password != guestInput.password)
             {
                 return StatusCode(StatusCodes.Status406NotAcceptable, "Неверный пароль.");
             }
             
-            return new ObjectResult(requiredGuest);
-            return NotFound($"Guest name: {name} not found");
+            return new ObjectResult(existGuest);
+        }
+        
+        [HttpPost]
+        public IActionResult LoginJson([FromBody]string json)
+        {
+            var guestInput = System.Text.Json.JsonSerializer.Deserialize<Guest>(json.ToString()!);
+            var existGuest = GetGuest(guestInput.name);
+
+            if (existGuest == null)
+            {
+                return NotFound($"Гость с именем '{guestInput.name}' не найден.");
+            }
+
+            if (existGuest.password != guestInput.password)
+            {
+                return StatusCode(StatusCodes.Status406NotAcceptable, "Неверный пароль.");
+            }
+            
+            return new ObjectResult(existGuest);
         }
 
         private Guest GetGuest(string name)
         {
             using (var db = new PdbContext())
             {
-                var result = db.Guests.Where(x => x.Name == name).ToList();
+                var result = db.Guests.Where(x => x.name == name).ToList();
 
                 if (result.Count > 1)
                 {

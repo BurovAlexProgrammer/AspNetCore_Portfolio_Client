@@ -1,12 +1,10 @@
 ﻿using System.Diagnostics;
-using System.IO;
-using System.Linq;
+using System.Net.Http.Json;
+using System.Text.Json;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
+using WebAPI.Constants;
 using WebClient.Constants;
 using WebClient.Models;
 using WebDAL.Entity;
@@ -33,24 +31,25 @@ namespace WebClient.Controllers
         {
             if (ModelState.IsValid)
             {
-                // var t = ModelState.ToDictionary(x => x.Key, y => y.Value.RawValue.ToString());
-                var response = await Program.ApiClient.GetAsync($"api/Guest/Login/{guest.Name}/{guest.Password}");
-                var content = await response.Content.ReadAsStringAsync();
+                var response = await Program.ApiClient.PostAsync(ApiEndpoints.GuestLogin, JsonContent.Create(guest));
+                var guestJson = await response.Content.ReadAsStringAsync();
 
                 if (response.IsSuccessStatusCode)
                 {
-                    var guestResponse = JsonConvert.DeserializeObject<Guest>(content);
-                    HttpContext.Response.Cookies.Append("GuestName", guestResponse.Name);
-                    return RedirectToRoute(Endpoints.Home);
+                    HttpContext.Response.Cookies.Append(CookieNames.Guest, guestJson);
+                    return RedirectToRoute("");
                 }
             }
 
             return View(guest);
         }
 
+        [Route("")]
+        [Route("Home")]
+        [Route("Home/Index")]
         public IActionResult Index()
         {
-            var guest = new Guest() { Name = ControllerContext.HttpContext.Request.Cookies["GuestName"] };
+            var guest = new Guest() { name = ControllerContext.HttpContext.Request.Cookies[CookieNames.Guest] };
             return View(guest);
         }
 

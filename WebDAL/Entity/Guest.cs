@@ -7,16 +7,18 @@ namespace WebDAL.Entity
     //[Table("Guests")]
     public class Guest
     {
-        public Int64 Id { get; set; }
+        public Int64 id { get; set; }
 
         [Required] //NOT_NULL
         [MinLength(2)]
         [MaxLength(20)]
-        public string Name { get; set; }
+        public string name { get; set; }
 
         [Required]
         [MinLength(3)]
         [MaxLength(20)]
-        public string Password { get; set; }
+        public string password { get; set; }
+
+        public bool checkIt;
     }
 }

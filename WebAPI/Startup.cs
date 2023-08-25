@@ -5,7 +5,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json.Serialization;
-using WebDAL.Entity;
 
 namespace WebAPI
 {
@@ -18,20 +17,18 @@ namespace WebAPI
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers()
-                // .AddJsonOptions(options => { options.JsonSerializerOptions.PropertyNamingPolicy = null; })
-                .AddNewtonsoftJson(options =>
-                {
-                    options.SerializerSettings.ContractResolver = new DefaultContractResolver();
-                });
+                .AddJsonOptions(options => { options.JsonSerializerOptions.PropertyNameCaseInsensitive = false; });
+                // .AddNewtonsoftJson(options =>
+                // {
+                //     options.SerializerSettings.ContractResolver = new DefaultContractResolver();
+                // });
             
             services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebAPI", Version = "v1" }); });
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
@@ -49,8 +46,6 @@ namespace WebAPI
 
             app.UseEndpoints(endpoints =>
             {
-                var user = new Guest();
-
                 endpoints.MapControllers();
             });
         }

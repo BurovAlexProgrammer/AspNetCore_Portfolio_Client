@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using WebClient.Constants;
 using WebClient.Data;
 
@@ -23,7 +24,9 @@ namespace WebClient
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews();
+            services.AddLogging();
+            services.AddControllersWithViews()
+                .AddJsonOptions((options) => options.JsonSerializerOptions.PropertyNameCaseInsensitive = false);
             
             services.Configure<CookiePolicyOptions>(options => {
                 options.CheckConsentNeeded = context => true;
@@ -58,6 +61,13 @@ namespace WebClient
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseRouting();
+            
+            app.Use(async (context, next) =>
+            {
+                Console.WriteLine($"{DateTime.Now:HH:mm:fff} - Route '{context.Request.Path}'");
+                await next.Invoke();
+            });
+            
             app.UseAuthorization();
 
             app.Use(async (context, next) =>

@@ -1,12 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAPI", "WebAPI\WebAPI.csproj", "{01E3F3DE-9624-4F56-A966-8086DABF233F}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TempConsoleApp", "TempConsoleApp\TempConsoleApp.csproj", "{252FAEDB-3B71-4731-B752-1A941EBA0053}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebClient", "WebClient\WebClient.csproj", "{F455A508-904D-4A2A-929B-A541C744AD8C}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebDAL", "WebDAL\WebDAL.csproj", "{A5BA5F69-C4A8-4F0C-AF85-8E18850F938F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -14,21 +8,9 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{01E3F3DE-9624-4F56-A966-8086DABF233F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{01E3F3DE-9624-4F56-A966-8086DABF233F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{01E3F3DE-9624-4F56-A966-8086DABF233F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{01E3F3DE-9624-4F56-A966-8086DABF233F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{252FAEDB-3B71-4731-B752-1A941EBA0053}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{252FAEDB-3B71-4731-B752-1A941EBA0053}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{252FAEDB-3B71-4731-B752-1A941EBA0053}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{252FAEDB-3B71-4731-B752-1A941EBA0053}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F455A508-904D-4A2A-929B-A541C744AD8C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F455A508-904D-4A2A-929B-A541C744AD8C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F455A508-904D-4A2A-929B-A541C744AD8C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F455A508-904D-4A2A-929B-A541C744AD8C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A5BA5F69-C4A8-4F0C-AF85-8E18850F938F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A5BA5F69-C4A8-4F0C-AF85-8E18850F938F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A5BA5F69-C4A8-4F0C-AF85-8E18850F938F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A5BA5F69-C4A8-4F0C-AF85-8E18850F938F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F455A508-904D-4A2A-929B-A541C744AD8C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 EndGlobal
