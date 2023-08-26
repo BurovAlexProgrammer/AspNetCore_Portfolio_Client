@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Diagnostics;
+using System.Net.Http.Json;
+using System.Text.Json;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -8,8 +11,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using WebAPI.Constants;
 using WebClient.Constants;
 using WebClient.Data;
+using WebDAL.Entity;
 
 namespace WebClient
 {
@@ -72,12 +77,37 @@ namespace WebClient
 
             app.Use(async (context, next) =>
             {
-                if (!context.Request.Cookies.ContainsKey("GuestName") && context.Request.Path.Value != Endpoints.Login)
+                if (context.Request.Path.Value == Endpoints.Login)
                 {
-                    Console.WriteLine("GuestName is empty");
+                    await next.Invoke();
+                    return;
+                }
+                
+                if (!context.Request.Cookies.TryGetValue(CookieNames.Guest, out string guestJson))
+                {
+                    Console.WriteLine("GuestCookie is empty.");
                     context.Response.Redirect(Endpoints.Login);
+                    return;
                 }
 
+                var cookieGuest = JsonSerializer.Deserialize<Guest>(guestJson);
+
+                if (cookieGuest == null)
+                {
+                    Console.WriteLine("Cannot parse Guest cookie.");
+                    context.Response.Redirect(Endpoints.Login);
+                    return;
+                }
+
+                if (cookieGuest.token == null)
+                {
+                    Console.WriteLine("Cookie guest token is empty.");
+                    context.Response.Redirect(Endpoints.Login);
+                    return;
+                }
+                
+                var response = await Program.ApiClient.PostAsync(ApiEndpoints.GuestAuthenticate, JsonContent.Create(cookieGuest));
+                //TODO get response content as bool 
                 await next.Invoke();
             });
 

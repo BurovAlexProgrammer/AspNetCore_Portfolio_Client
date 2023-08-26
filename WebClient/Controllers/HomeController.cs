@@ -37,7 +37,7 @@ namespace WebClient.Controllers
                 if (response.IsSuccessStatusCode)
                 {
                     HttpContext.Response.Cookies.Append(CookieNames.Guest, guestJson);
-                    return RedirectToRoute("");
+                    return RedirectToAction("Index");
                 }
             }
 
@@ -49,7 +49,8 @@ namespace WebClient.Controllers
         [Route("Home/Index")]
         public IActionResult Index()
         {
-            var guest = new Guest() { name = ControllerContext.HttpContext.Request.Cookies[CookieNames.Guest] };
+            var guestCookie = ControllerContext.HttpContext.Request.Cookies[CookieNames.Guest];
+            var guest = JsonSerializer.Deserialize<Guest>(guestCookie);
             return View(guest);
         }
 
