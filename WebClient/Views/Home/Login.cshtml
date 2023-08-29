@@ -1,4 +1,5 @@
-﻿@model WebDAL.Entity.Guest
+﻿@using System.IO
+@model WebDAL.Entity.Guest
 
 @{
     ViewBag.Title = "Вход";
@@ -9,25 +10,25 @@
 <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.17.0/jquery.validate.min.js"></script>
 <script src="https://ajax.aspnetcdn.com/ajax/jquery.validation.unobtrusive/3.2.10/jquery.validate.unobtrusive.min.js"></script>
 
-<h2>Вход</h2>
-
-<div class="row">
+<div class="row  text-center">
     <div class="col-md-4">
         <form asp-action="Login">
+            <span class="bg-primary rounded-lg">
+                <object type="image/svg+xml" data="~/images/iconLogin.svg" width="50" height="50"> </object>
+                @* <img src="images/iconLogin.svg" class="h-25 w-25 mb-4" alt="" width="72" height="72"/> *@
+            </span>
+            <h1 class="h3 mb-3 font-weight-normal">Вход</h1>
+
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="name" class="control-label">Имя</label>
-                <input asp-for="name" class="form-control" />
-                <span asp-validation-for="name" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="password" class="control-label">Пароль</label>
-                <input asp-for="password" class="form-control" />
-                <span asp-validation-for="password" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Войти" class="btn btn-primary" />
-            </div>
+
+            <label asp-for="name" class="sr-only">Имя</label>
+            <input asp-for="name" class="form-control" placeholder="Имя" autofocus>
+            <span asp-validation-for="name" class="text-danger"></span>
+
+            <label asp-for="password" class="sr-only">Пароль</label>
+            <input asp-for="password" type="password" class="form-control" placeholder="Пароль">
+            <span asp-validation-for="password" class="text-danger"></span>
+            <button class="btn btn-lg btn-primary btn-block mb-5" type="submit">Войти</button>
         </form>
     </div>
 </div>
