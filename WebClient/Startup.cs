@@ -107,7 +107,14 @@ namespace WebClient
                 }
                 
                 var response = await Program.ApiClient.PostAsync(ApiEndpoints.GuestAuthenticate, JsonContent.Create(cookieGuest));
-                //TODO get response content as bool 
+                
+                if (!response.IsSuccessStatusCode)
+                {
+                    Console.WriteLine("Cookie guest token not .");
+                    context.Response.Redirect(Endpoints.Login);
+                    return;
+                }
+                
                 await next.Invoke();
             });
 

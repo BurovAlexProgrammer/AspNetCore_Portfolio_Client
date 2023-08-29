@@ -10,27 +10,27 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9128b108-1b8a-4bcc-bbb2-141fed9b4ff3" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.AspNetCore_Portfolio/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.AspNetCore_Portfolio/.idea/encodings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.AspNetCore_Portfolio/.idea/indexLayout.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.AspNetCore_Portfolio/.idea/projectSettingsUpdater.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.AspNetCore_Portfolio/.idea/vcs.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.AspNetCore_Portfolio/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.AspNetCore_Portfolio/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AspNetCore_Portfolio.sln" beforeDir="false" afterPath="$PROJECT_DIR$/Client_Portfolio.sln" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DAL/AspNetCore_Portfolio_DAL/Constants/ApiEndpoints.cs" beforeDir="false" afterPath="$PROJECT_DIR$/DAL/AspNetCore_Portfolio_DAL/Constants/ApiEndpoints.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebClient/Controllers/HomeController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WebClient/Controllers/HomeController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebClient/Constants/Endpoints.cs" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/WebClient/Startup.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WebClient/Startup.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebClient/Views/Shared/_Layout.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/WebClient/Views/Shared/_Layout.cshtml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="ChangesViewManager">
+    <option name="groupingKeys">
+      <option value="repository" />
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/b75812595c6642a6a78ba020d04970511bd1a8/fe/db86eb10/HttpClient.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/e1dc86db62f348eda3e48bb1310ad96c1bbf90/4b/bec43cc0/ControllerBase.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/41c38835997acae9462095797b37e9542f8230995fc97e4f5380cfc532921170/ControllerEndpointRouteBuilderExtensions.cs" root0="FORCE_HIGHLIGHTING" />
@@ -169,7 +169,7 @@
       <workItem from="1692978389479" duration="1766000" />
       <workItem from="1692980454016" duration="235000" />
       <workItem from="1692980709760" duration="4257000" />
-      <workItem from="1692993256795" duration="8547000" />
+      <workItem from="1692993256795" duration="13663000" />
     </task>
     <task id="LOCAL-00001" summary="Recreate clean project">
       <created>1692469122920</created>
@@ -248,7 +248,21 @@
       <option name="project" value="LOCAL" />
       <updated>1692994413271</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Add guest token check">
+      <created>1693064066579</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1693064066579</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Clean">
+      <created>1693079808130</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1693079808130</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -278,12 +292,14 @@
     <MESSAGE value="Implement first Client-API transfer" />
     <MESSAGE value="Implement simple login" />
     <MESSAGE value="Clean project" />
-    <option name="LAST_COMMIT_MESSAGE" value="Clean project" />
+    <MESSAGE value="Add guest token check" />
+    <MESSAGE value="Clean" />
+    <option name="LAST_COMMIT_MESSAGE" value="Clean" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+        <line-breakpoint type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/WebAPI/Controllers/GuestController.cs</url>
           <line>23</line>
           <properties documentPath="D:\_NetCore\AspNetCore_Portfolio\WebAPI\Controllers\GuestController.cs" initialLine="23" containingFunctionPresentation="method 'Login'">
@@ -296,7 +312,7 @@
           </properties>
           <option name="timeStamp" value="26" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+        <line-breakpoint type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/WebAPI/Controllers/GuestController.cs</url>
           <line>42</line>
           <properties documentPath="D:\_NetCore\AspNetCore_Portfolio\WebAPI\Controllers\GuestController.cs" initialLine="42" containingFunctionPresentation="method 'Login'">
@@ -309,7 +325,7 @@
           </properties>
           <option name="timeStamp" value="28" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+        <line-breakpoint type="DotNet Breakpoints">
           <url>file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/41c38835997acae9462095797b37e9542f8230995fc97e4f5380cfc532921170/ControllerEndpointRouteBuilderExtensions.cs</url>
           <line>32</line>
           <properties documentPath="C:\Users\burov\AppData\Roaming\JetBrains\Rider2022.3\resharper-host\SourcesCache\41c38835997acae9462095797b37e9542f8230995fc97e4f5380cfc532921170\ControllerEndpointRouteBuilderExtensions.cs" initialLine="32" containingFunctionPresentation="method 'MapControllers'">
@@ -322,20 +338,20 @@
           </properties>
           <option name="timeStamp" value="31" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+        <line-breakpoint type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/WebClient/Startup.cs</url>
-          <line>110</line>
+          <line>117</line>
           <properties documentPath="D:\_NetCore\AspNetCore_Portfolio\WebClient\Startup.cs" initialLine="110" containingFunctionPresentation="lambda expression inside method 'Configure'">
             <startOffsets>
-              <option value="3872" />
+              <option value="4099" />
             </startOffsets>
             <endOffsets>
-              <option value="3892" />
+              <option value="4119" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="33" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+        <line-breakpoint type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/WebClient/Startup.cs</url>
           <line>79</line>
           <properties documentPath="D:\_NetCore\AspNetCore_Portfolio\WebClient\Startup.cs" initialLine="79" containingFunctionPresentation="lambda expression inside method 'Configure'">
@@ -348,20 +364,7 @@
           </properties>
           <option name="timeStamp" value="34" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/WebClient/Controllers/HomeController.cs</url>
-          <line>31</line>
-          <properties documentPath="D:\_NetCore\AspNetCore_Portfolio\WebClient\Controllers\HomeController.cs" initialLine="31" containingFunctionPresentation="method 'Login'">
-            <startOffsets>
-              <option value="734" />
-            </startOffsets>
-            <endOffsets>
-              <option value="757" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="35" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+        <line-breakpoint type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/WebClient/Controllers/HomeController.cs</url>
           <line>51</line>
           <properties documentPath="D:\_NetCore\AspNetCore_Portfolio\WebClient\Controllers\HomeController.cs" initialLine="51" containingFunctionPresentation="method 'Index'">
@@ -373,6 +376,19 @@
             </endOffsets>
           </properties>
           <option name="timeStamp" value="36" />
+        </line-breakpoint>
+        <line-breakpoint type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/WebClient/Controllers/HomeController.cs</url>
+          <line>31</line>
+          <properties documentPath="D:\_NetCore\AspNetCore_Portfolio\WebClient\Controllers\HomeController.cs" initialLine="31" containingFunctionPresentation="method 'Login'">
+            <startOffsets>
+              <option value="734" />
+            </startOffsets>
+            <endOffsets>
+              <option value="757" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="37" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
