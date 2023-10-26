@@ -34,12 +34,10 @@ namespace WebClient
                 options.MinimumSameSitePolicy = SameSiteMode.Strict;
             });
             
-            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-                .AddCookie(options =>
+            services.AddAuthentication("Cookie")
+                .AddCookie("Cookie", config =>
                 {
-                    options.ExpireTimeSpan = TimeSpan.FromMinutes(20);
-                    options.SlidingExpiration = true;
-                    options.AccessDeniedPath = "/Forbidden/";
+                    config.LoginPath = Endpoints.Login;
                 });
 
             services.AddAuthorization();

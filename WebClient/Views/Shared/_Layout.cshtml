@@ -20,10 +20,15 @@
                     <a class="nav-link" asp-controller="Home" asp-action="Index">Главная<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" asp-controller="Account" asp-action="Profile">Profile</a>
+                    <a class="nav-link" asp-controller="Account" asp-action="Profile">Профиль</a>
                 </li>
             </ul>
-            <button class="btn btn-outline-light" type="submit">Выйти</button>
+            @if (Context.User.Identity.IsAuthenticated)
+            {
+                <form>
+                    <button class="btn btn-outline-light" type="submit" asp-controller="Account" asp-action="LogOff">Выйти</button>
+                </form>
+            }
         </div>
     </nav>
     <main role="main" class="container-fluid flex-fill py-3">

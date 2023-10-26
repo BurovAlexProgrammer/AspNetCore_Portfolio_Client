@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using WebClient.Constants;
 using WebClient.Models;
-using WebDAL.Models;
+using WebDAL.Entities;
 
 namespace WebClient.Controllers
 {
@@ -16,10 +16,7 @@ namespace WebClient.Controllers
         {
             _logger = logger;
         }
-
-        [Route("")]
-        [Route("Home")]
-        [Route("Home/Index")]
+        
         public IActionResult Index()
         {
             var accountCookie = ControllerContext.HttpContext.Request.Cookies[CookieNames.Account] ?? "{}";
@@ -27,8 +24,7 @@ namespace WebClient.Controllers
             account.name ??= "Незнакомец";
             return View(account);
         }
-
-        [Route("Home/Privacy")]
+        
         public IActionResult Privacy()
         {
             return View();

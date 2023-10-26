@@ -1,5 +1,8 @@
-﻿using System.Net.Http.Json;
+﻿using System.Collections.Generic;
+using System.Net.Http.Json;
+using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WebAPI.Constants;
@@ -23,17 +26,30 @@ namespace WebClient.Controllers
         {
             if (ModelState.IsValid)
             {
-                var response = await Program.ApiClient.PostAsync(ApiEndpoints.GuestLogin, JsonContent.Create(model));
-                var accountJson = await response.Content.ReadAsStringAsync();
+                // var response = await Program.ApiClient.PostAsync(ApiEndpoints.AccountLogin, JsonContent.Create(model));
+                // var accountJson = await response.Content.ReadAsStringAsync();
+                //
+                // if (response.IsSuccessStatusCode)
+                // {
+                //     HttpContext.Response.Cookies.Append(CookieNames.Account, accountJson);
+                //     return Redirect(model.ReturnUrl);
+                // }
 
-                if (response.IsSuccessStatusCode)
-                {
-                    HttpContext.Response.Cookies.Append(CookieNames.Account, accountJson);
-                    return Redirect(model.ReturnUrl);
-                }
+                var claims = new List<Claim>() { new("Demo", "Value") };
+                var claimsIdentity = new ClaimsIdentity(claims, "Cookie");
+                var claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
+                await HttpContext.SignInAsync("Cookie", claimsPrincipal);
+                
+                return Redirect(model.ReturnUrl);
             }
 
             return View(model);
+        }
+
+        public async Task<IActionResult> LogOff()
+        {
+            await HttpContext.SignOutAsync("Cookie");
+            return Redirect(Endpoints.Home);
         }
 
         public IActionResult Profile()
