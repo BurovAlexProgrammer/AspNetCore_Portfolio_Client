@@ -1,8 +1,7 @@
-﻿@using System.IO
-@model WebDAL.Entity.Guest
+﻿@model WebDAL.Models.AccountLoginModel
 
 @{
-    ViewBag.Title = "Вход";
+    ViewBag.Title = "title";
     Layout = "_Layout";
 }
 
@@ -13,6 +12,7 @@
 <div class="row justify-content-center mt-5 text-center">
     <div class="col-md-4">
         <form asp-action="Login">
+            <input hidden asp-for="ReturnUrl"/>
             <span>
                 <object type="image/svg+xml" data="~/images/login2.svg" width="80" height="80"> </object>
             </span>
@@ -21,15 +21,15 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
             <div class="form-group">
-                <label asp-for="name" class="sr-only">Имя</label>
-                <input asp-for="name" class="form-control" placeholder="Имя" autofocus>
-                <span asp-validation-for="name" class="text-danger"></span>
+                <label asp-for="AccountIdentity" class="sr-only">Почта</label>
+                <input asp-for="AccountIdentity" type="email" class="form-control" placeholder="Почта" autofocus>
+                <span asp-validation-for="AccountIdentity" class="text-danger"></span>
             </div>
 
             <div class="form-group">
-                <label asp-for="password" class="sr-only">Пароль</label>
-                <input asp-for="password" type="password" class="form-control" placeholder="Пароль">
-                <span asp-validation-for="password" class="text-danger"></span>
+                <label asp-for="Password" class="sr-only">Пароль</label>
+                <input asp-for="Password" type="password" class="form-control" placeholder="Пароль">
+                <span asp-validation-for="Password" class="text-danger"></span>
             </div>
 
             <div class="form-group">

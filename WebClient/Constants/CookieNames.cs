@@ -2,6 +2,6 @@
 {
     public class CookieNames
     {
-        public const string Guest = "Guest";
+        public const string Account = "Account";
     }
 }

@@ -17,13 +17,10 @@
         <div class="collapse navbar-collapse" id="navbarsExampleDefault">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Главная<span class="sr-only">(current)</span></a>
+                    <a class="nav-link" asp-controller="Home" asp-action="Index">Главная<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">API</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Конфиденциальность</a>
+                    <a class="nav-link" asp-controller="Account" asp-action="Profile">Profile</a>
                 </li>
             </ul>
             <button class="btn btn-outline-light" type="submit">Выйти</button>
@@ -37,7 +34,7 @@
 
     <footer class="container-fluid bg-dark text-light text-muted py-3">
         <div class="container">
-            &copy; 2023 - Сайт-Portфолио - <a asp-area="" asp-controller="Home" asp-action="Privacy">Конфиденциальность</a>
+            &copy; 2023 - Сайт-Portфолио - <a asp-controller="Home" asp-action="Privacy">Конфиденциальность</a>
         </div>
     </footer>
 </wrapper>

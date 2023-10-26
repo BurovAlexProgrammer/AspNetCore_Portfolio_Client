@@ -17,4 +17,12 @@
       <ProjectReference Include="..\DAL\AspNetCore_Portfolio_DAL\AspNetCore_Portfolio_DAL.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="Views\Guest\Create.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Guest\Delete.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Guest\Details.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Guest\Edit.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Guest\Index.cshtml" />
+    </ItemGroup>
+
 </Project>
