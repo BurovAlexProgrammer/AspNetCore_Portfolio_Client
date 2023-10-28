@@ -1,10 +1,13 @@
-﻿using System.Collections.Generic;
-using System.Security.Claims;
+﻿using System.Net.Http.Json;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using WebAPI.Constants;
 using WebClient.Constants;
+using WebClient.Extensions;
+using WebDAL.Entities;
 using WebDAL.Models;
 
 namespace WebClient.Controllers
@@ -24,23 +27,22 @@ namespace WebClient.Controllers
         {
             if (ModelState.IsValid)
             {
-                // var response = await Program.ApiClient.PostAsync(ApiEndpoints.AccountLogin, JsonContent.Create(model));
-                // var accountJson = await response.Content.ReadAsStringAsync();
-                //
-                // if (response.IsSuccessStatusCode)
-                // {
-                //     HttpContext.Response.Cookies.Append(CookieNames.Account, accountJson);
-                //     return Redirect(model.ReturnUrl);
-                // }
-
-                var claims = new List<Claim>()
+                var response = await Program.ApiClient.PostAsync(ApiEndpoints.AccountLogin, JsonContent.Create(model));
+                
+                if (!response.IsSuccessStatusCode)
                 {
-                    new(ClaimTypes.Name, model.AccountIdentity),
-                    new(ClaimTypes.Role, Roles.User)
-                };
-                var claimsIdentity = new ClaimsIdentity(claims, AuthSchemes.Cookie);
-                var claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
-                await HttpContext.SignInAsync(AuthSchemes.Cookie, claimsPrincipal);
+                    // HttpContext.Response.Cookies.Append(CookieNames.Account, accountJson);
+                    // return Redirect(model.ReturnUrl);
+                    var message = await response.Content.ReadAsStringAsync();
+                    ModelState.AddModelError("", message);
+                    return View(model);
+                }
+                
+                var accountJson = await response.Content.ReadAsStringAsync();
+                var account = JsonSerializer.Deserialize<Account>(accountJson);
+                account.role = Roles.User; //TODO from db
+                var accountClaimsPrincipal = account.ToClaimsPrincipal(AuthSchemes.Cookie);
+                await HttpContext.SignInAsync(AuthSchemes.Cookie, accountClaimsPrincipal);
                 
                 return Redirect(model.ReturnUrl);
             }
