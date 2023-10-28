@@ -7,3 +7,14 @@
     <h1 class="display-4">Добро пожаловать</h1>
     <p>@Model.name</p>
 </div>
+
+<a asp-controller="Account" asp-action="Admin">Admin</a>
+<a asp-controller="Account" asp-action="User">User</a>
+
+<p>
+    Name: @ViewBag.Name
+</p>
+
+<p>
+    IsAuthenticated: @ViewBag.IsAuthenticated
+</p>

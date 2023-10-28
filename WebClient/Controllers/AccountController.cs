@@ -1,11 +1,9 @@
 ﻿using System.Collections.Generic;
-using System.Net.Http.Json;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using WebAPI.Constants;
 using WebClient.Constants;
 using WebDAL.Models;
 
@@ -35,10 +33,14 @@ namespace WebClient.Controllers
                 //     return Redirect(model.ReturnUrl);
                 // }
 
-                var claims = new List<Claim>() { new("Demo", "Value") };
-                var claimsIdentity = new ClaimsIdentity(claims, "Cookie");
+                var claims = new List<Claim>()
+                {
+                    new(ClaimTypes.Name, model.AccountIdentity),
+                    new(ClaimTypes.Role, Roles.User)
+                };
+                var claimsIdentity = new ClaimsIdentity(claims, AuthSchemes.Cookie);
                 var claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
-                await HttpContext.SignInAsync("Cookie", claimsPrincipal);
+                await HttpContext.SignInAsync(AuthSchemes.Cookie, claimsPrincipal);
                 
                 return Redirect(model.ReturnUrl);
             }
@@ -48,10 +50,23 @@ namespace WebClient.Controllers
 
         public async Task<IActionResult> LogOff()
         {
-            await HttpContext.SignOutAsync("Cookie");
+            await HttpContext.SignOutAsync(AuthSchemes.Cookie);
             return Redirect(Endpoints.Home);
         }
 
+        [Authorize(Policy = PolicyNames.User)]
+        public IActionResult User()
+        {
+            return View();
+        }
+
+        
+        [Authorize(Roles = PolicyNames.Admin)]
+        public IActionResult Admin()
+        {
+            return View();
+        }
+        
         public IActionResult Profile()
         {
             return View();

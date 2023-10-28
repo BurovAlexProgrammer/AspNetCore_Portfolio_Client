@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net.Http.Json;
+using System.Security.Claims;
 using System.Text.Json;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
@@ -28,19 +29,25 @@ namespace WebClient
             services.AddLogging();
             services.AddControllersWithViews()
                 .AddJsonOptions((options) => options.JsonSerializerOptions.PropertyNameCaseInsensitive = false);
-            
-            services.Configure<CookiePolicyOptions>(options => {
+
+            services.Configure<CookiePolicyOptions>(options =>
+            {
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.Strict;
             });
-            
-            services.AddAuthentication("Cookie")
-                .AddCookie("Cookie", config =>
+
+            services.AddAuthentication(AuthSchemes.Cookie)
+                .AddCookie(AuthSchemes.Cookie, config =>
                 {
                     config.LoginPath = Endpoints.Login;
+                    config.AccessDeniedPath = Endpoints.AccessDenied;
                 });
 
-            services.AddAuthorization();
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy(PolicyNames.User, Policies.User);
+                options.AddPolicy(PolicyNames.Admin, Policies.Admin);
+            });
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -59,7 +66,7 @@ namespace WebClient
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseRouting();
-            
+
             app.Use(async (context, next) =>
             {
                 Console.WriteLine($"{DateTime.Now:HH:mm:fff} - Route '{context.Request.Path}'");

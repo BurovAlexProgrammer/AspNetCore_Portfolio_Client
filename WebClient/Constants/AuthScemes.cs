@@ -2,6 +2,6 @@
 {
     public class AuthSchemes
     {
-        public static string Cookie = "Cookie";
+        public const string Cookie = "Cookie";
     }
 }

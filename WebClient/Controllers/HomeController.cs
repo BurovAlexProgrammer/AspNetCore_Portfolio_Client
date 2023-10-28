@@ -19,6 +19,9 @@ namespace WebClient.Controllers
         
         public IActionResult Index()
         {
+            ViewBag.Name = User.Identity.Name;
+            ViewBag.IsAuthenticated = User.Identity.IsAuthenticated;
+            
             var accountCookie = ControllerContext.HttpContext.Request.Cookies[CookieNames.Account] ?? "{}";
             var account = JsonSerializer.Deserialize<Account>(accountCookie);
             account.name ??= "Незнакомец";
@@ -29,7 +32,13 @@ namespace WebClient.Controllers
         {
             return View();
         }
+        
+        public IActionResult AccessDenied()
+        {
+            return View();
+        }
 
+        
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
